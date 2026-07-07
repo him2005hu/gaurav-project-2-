@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lean90 | HealthDecod Transformation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .image-animate {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .image-animate:hover {
+            transform: scale(1.01);
+        }
+        .image-animate.clicked {
+            animation: image-bounce 0.6s ease-in-out;
+        }
+        .hero-image-enter {
+            animation: slide-in-right 0.8s ease-out both;
+        }
+        @keyframes image-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(-2deg); }
+            50% { transform: translateY(0) rotate(2deg); }
+            75% { transform: translateY(-4px) rotate(-1deg); }
+        }
+        @keyframes slide-in-right {
+            0% {
+                opacity: 0;
+                transform: translateX(80px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bccbb9",
+                        "on-primary-container": "#004b1e",
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#005321",
+                        "success-green": "#22C55E",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#005ac2",
+                        "ink-slate": "#0F172A",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#82abff",
+                        "surface-tint": "#006e2f",
+                        "primary-fixed-dim": "#4ae176",
+                        "on-surface-variant": "#3d4a3d",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary": "#006e2f",
+                        "secondary": "#565e74",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-dim": "#d8dadc",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "surface-container": "#eceef0",
+                        "border-muted": "#E2E8F0",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#191c1e",
+                        "surface-base": "#FFFFFF",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed": "#002109",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "secondary-container": "#dae2fd",
+                        "on-secondary-fixed": "#131b2e",
+                        "primary-container": "#22c55e",
+                        "on-surface": "#191c1e",
+                        "surface-subtle": "#F8FAFC",
+                        "tertiary-fixed": "#d8e2ff",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#4ae176",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-tertiary-fixed": "#001a42",
+                        "on-secondary-container": "#5c647a",
+                        "outline": "#6d7b6c",
+                        "on-tertiary-container": "#003d88",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed": "#6bff8f",
+                        "secondary-fixed-dim": "#bec6e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "margin-edge": "32px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px",
+                        "container-max": "1200px",
+                        "section-gap": "120px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["30px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface-subtle text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container grid-bg">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-base/90 backdrop-blur-md shadow-sm border-b border-border-muted transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-edge h-16">
+<div class="flex items-center gap-2">
+<img alt="HealthDecod Logo" class="w-10 h-10 object-contain rounded-full" src="https://i.ibb.co/zWNjs1sf/image-from-https-lean90-preview-preview-emergentagent-com-healthdecod-logo.png"/>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Lean90</span>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#process">Process</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#benefits">Benefits</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#faq">FAQ</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#results">Results</a>
+</nav>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-xl hover:opacity-80 transition-opacity shadow-lg shadow-primary/20">
+                Get Started
+            </button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Section 1: Hero -->
+<section class="relative min-h-[60vh] flex items-center overflow-hidden hero-gradient">
+<div class="max-w-container-max mx-auto px-margin-edge w-full grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center py-12">
+<div class="z-10 order-2 lg:order-1">
+<div class="flex items-center gap-3 mb-stack-md">
+<img alt="Company logo" class="w-14 h-14 object-contain rounded-2xl bg-white/80 p-2 shadow-sm" src="https://i.ibb.co/zWNjs1sf/image-from-https-lean90-preview-preview-emergentagent-com-healthdecod-logo.png"/>
+<span class="inline-block bg-primary-container/10 text-primary px-4 py-2 rounded-full font-label-sm text-label-sm">90-Day Fat Loss Transformation</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-ink-slate mb-stack-lg leading-tight">
+                        Lose Weight Without Starving Yourself, Giving Up Your Favorite Foods, or Spending Hours in the Gym.
+                    </h1>
+<p class="font-body-lg text-body-lg text-secondary mb-stack-lg max-w-xl">
+                        The complete 90-day fat loss system with meal plans, workout programs, habit trackers, and step-by-step transformation tools.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 mb-stack-lg">
+<button class="bg-success-green text-white font-label-md text-label-md px-8 py-4 rounded-xl hover:scale-105 transition-transform shadow-xl shadow-success-green/25">
+                            Start Your 90-Day Transformation
+                        </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+<div class="flex items-center gap-2 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-success-green" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Home & Gym Workouts
+                        </div>
+<div class="flex items-center gap-2 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-success-green" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Meal Plans Included
+                        </div>
+<div class="flex items-center gap-2 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-success-green" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Beginner Friendly
+                        </div>
+<div class="flex items-center gap-2 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-success-green" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Instant Digital Access
+                        </div>
+</div>
+</div>
+<div class="relative order-1 lg:order-2">
+<div class="relative z-10 rounded-[32px] overflow-hidden shadow-2xl hero-image-enter">
+<img alt="Happy fit couple showing transformation results" class="image-animate w-full aspect-[1.79] object-cover" src="https://i.ibb.co/LX91yFTf/image.png"/>
+<div class="absolute bottom-6 left-6 glass-card p-4 rounded-2xl flex items-center gap-4">
+<div class="w-10 h-10 bg-success-green rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wider text-secondary">Real Results</p>
+<p class="font-label-md text-label-md text-ink-slate">90-Day Transformation</p>
+</div>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-success-green/10 rounded-full blur-3xl -z-10"></div>
+</div>
+</div>
+</section>
+<!-- Section 2: The Problem -->
+<section class="py-section-gap bg-surface-base">
+<div class="max-w-container-max mx-auto px-margin-edge">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-ink-slate mb-4">Tired of Starting Over Every Monday?</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Pain Point Card -->
+<div class="p-stack-lg rounded-2xl bg-surface-subtle border border-border-muted hover:border-primary/30 transition-all">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">psychology</span>
+</div>
+<p class="font-body-md text-body-md text-secondary">You lose motivation after a few days because the plan is too restrictive.</p>
+</div>
+<div class="p-stack-lg rounded-2xl bg-surface-subtle border border-border-muted hover:border-primary/30 transition-all">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">restaurant_menu</span>
+</div>
+<p class="font-body-md text-body-md text-secondary">Diets feel impossible to follow when you have to cook separate meals.</p>
+</div>
+<div class="p-stack-lg rounded-2xl bg-surface-subtle border border-border-muted hover:border-primary/30 transition-all">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">nutrition</span>
+</div>
+<p class="font-body-md text-body-md text-secondary">You don't know what foods actually help you burn fat vs store it.</p>
+</div>
+<div class="p-stack-lg rounded-2xl bg-surface-subtle border border-border-muted hover:border-primary/30 transition-all">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">cycle</span>
+</div>
+<p class="font-body-md text-body-md text-secondary">You lose weight and gain it back in a frustrating endless cycle.</p>
+</div>
+<div class="p-stack-lg rounded-2xl bg-surface-subtle border border-border-muted hover:border-primary/30 transition-all">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">schedule</span>
+</div>
+<p class="font-body-md text-body-md text-secondary">You don't have time for complicated 2-hour workout routines.</p>
+</div>
+</div>
+<div class="mt-stack-lg text-center max-w-2xl mx-auto">
+<h3 class="font-headline-sm text-headline-sm text-ink-slate mb-4">It Is Not Your Fault.</h3>
+<p class="font-body-lg text-body-lg text-secondary">Most people do not struggle because they lack effort or discipline.</p>
+<p class="font-body-lg text-body-lg text-secondary mt-2"><span class="text-primary font-bold">They struggle because they have not had a clear, proven framework to guide them.</span></p>
+</div>
+</div>
+</section>
+<!-- Section 3: The Solution (Bento Grid Style) -->
+<section class="py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-edge">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-slate mb-4">Meet HealthDecod's Lean90 System</h2>
+<p class="font-body-lg text-body-lg text-secondary">A comprehensive ecosystem designed for modern lifestyles.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-stack-lg">
+<div class="group overflow-hidden rounded-[28px] bg-gradient-to-br from-white via-slate-50 to-emerald-50 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-slate-200/80">
+<div class="p-3">
+<div class="overflow-hidden rounded-[22px] bg-slate-50">
+<img src="https://i.ibb.co/mYGqz4V/Chat-GPT-Image-Jun-1-2026-12-25-27-AM.png" alt="Lean90 ebook preview" class="h-40 w-full object-contain p-2 transition-transform duration-300 group-hover:scale-[1.03]"/>
+</div>
+</div>
+<div class="px-4 pb-5 text-center">
+<div class="inline-flex items-center gap-2 rounded-full bg-emerald-100/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-700 mb-2">
+<span class="material-symbols-outlined text-sm">menu_book</span>
+Lean90 Ebook
+</div>
+<p class="text-sm text-slate-600">Your step-by-step guide to fat loss and habits.</p>
+</div>
+</div>
+<div class="group overflow-hidden rounded-[24px] bg-surface-base shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 border border-border-muted">
+<img src="https://i.ibb.co/2YtpvWdN/images-1.jpg" alt="Lean90 system image 2" class="h-40 w-full object-cover"/>
+<div class="p-4 text-center">
+<span class="font-label-md text-label-md text-ink-slate">Meal Planner</span>
+</div>
+</div>
+<div class="group overflow-hidden rounded-[28px] bg-gradient-to-br from-white via-slate-50 to-emerald-50 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-slate-200/80">
+<div class="p-3">
+<div class="overflow-hidden rounded-[22px] bg-slate-50">
+<img src="https://i.ibb.co/5hVVCGdh/Chat-GPT-Image-Jun-1-2026-12-25-27-AM.png" alt="Workout Guide preview" class="h-40 w-full object-contain p-2 transition-transform duration-300 group-hover:scale-[1.03]"/>
+</div>
+</div>
+<div class="px-4 pb-5 text-center">
+<div class="inline-flex items-center gap-2 rounded-full bg-emerald-100/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-700 mb-2">
+<span class="material-symbols-outlined text-sm">fitness_center</span>
+Workout Guide
+</div>
+<p class="text-sm text-slate-600">Simple, effective training plans for every stage.</p>
+</div>
+</div>
+<div class="group overflow-hidden rounded-[24px] bg-surface-base shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 border border-border-muted">
+<img src="https://i.ibb.co/m5Y4MVKf/images-3.jpg" alt="Lean90 system image 4" class="h-40 w-full object-cover"/>
+<div class="p-4 text-center">
+<span class="font-label-md text-label-md text-ink-slate">Progress Tracker</span>
+</div>
+</div>
+<div class="group overflow-hidden rounded-[24px] bg-surface-base shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 border border-border-muted">
+<img src="https://i.ibb.co/qLsDvRSm/images-4.jpg" alt="Lean90 system image 5" class="h-40 w-full object-cover"/>
+<div class="p-4 text-center">
+<span class="font-label-md text-label-md text-ink-slate">Grocery List</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: What's Included -->
+<section class="py-section-gap bg-white relative overflow-hidden" id="process">
+<div class="max-w-container-max mx-auto px-margin-edge relative z-10">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-slate mb-4">What's Included</h2>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">Everything you need for a complete transformation, laid out in an easy-to-follow sequence.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Step Cards -->
+<div class="group p-stack-lg rounded-[24px] bg-surface-subtle border border-border-muted hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">monitor_heart</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-ink-slate mb-2">Fat Loss Fundamentals</h4>
+<p class="font-body-md text-body-md text-secondary">Master the science behind sustainable weight loss and metabolism optimization.</p>
+</div>
+<div class="group p-stack-lg rounded-[24px] bg-surface-subtle border border-border-muted hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">restaurant_menu</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-ink-slate mb-2">Nutrition Blueprint</h4>
+<p class="font-body-md text-body-md text-secondary">Simple meal strategies that fit your lifestyle without restrictive dieting.</p>
+</div>
+<div class="group p-stack-lg rounded-[24px] bg-surface-subtle border border-border-muted hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">fitness_center</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-ink-slate mb-2">Home Workout Program</h4>
+<p class="font-body-md text-body-md text-secondary">Effective bodyweight exercises you can do anywhere, anytime in 30 minutes.</p>
+</div>
+<div class="group p-stack-lg rounded-[24px] bg-surface-subtle border border-border-muted hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">sports_gymnastics</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-ink-slate mb-2">Gym Workout Program</h4>
+<p class="font-body-md text-body-md text-secondary">Structured training plan with progressive overload for maximum body recomposition.</p>
+</div>
+<div class="group p-stack-lg rounded-[24px] bg-surface-subtle border border-border-muted hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">timeline</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-ink-slate mb-2">90-Day Roadmap</h4>
+<p class="font-body-md text-body-md text-secondary">Week-by-week action plan to keep you on track and motivated every single day.</p>
+</div>
+<div class="group p-stack-lg rounded-[24px] bg-surface-subtle border border-border-muted hover:bg-white hover:shadow-xl transition-all duration-300">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">verified</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-ink-slate mb-2">Maintenance Strategy</h4>
+<p class="font-body-md text-body-md text-secondary">Keep the weight off for good with proven lifestyle maintenance protocols.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Bonuses -->
+<section class="py-section-gap" id="benefits">
+<div class="max-w-2xl mx-auto px-margin-edge">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-slate mb-4">Plus, You Get These Free Bonuses</h2>
+<p class="font-body-md text-body-md text-secondary">Expertly crafted tools to accelerate your progress.</p>
+</div>
+<div class="space-y-4">
+<!-- Bonus Row -->
+<div class="flex items-center justify-between p-6 bg-white rounded-2xl border border-border-muted shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">workspace_premium</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Bonus #1</p>
+<h5 class="font-label-md text-label-md text-ink-slate">30-Day Meal Planner</h5>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-secondary font-bold uppercase">Value</p>
+<p class="font-label-md text-label-md text-success-green">$19</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-6 bg-white rounded-2xl border border-border-muted shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">task_alt</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Bonus #2</p>
+<h5 class="font-label-md text-label-md text-ink-slate">Habit Tracker</h5>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-secondary font-bold uppercase">Value</p>
+<p class="font-label-md text-label-md text-success-green">$9</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-6 bg-white rounded-2xl border border-border-muted shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">query_stats</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Bonus #3</p>
+<h5 class="font-label-md text-label-md text-ink-slate">Progress Tracker</h5>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-secondary font-bold uppercase">Value</p>
+<p class="font-label-md text-label-md text-success-green">$19</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-6 bg-white rounded-2xl border border-border-muted shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Bonus #4</p>
+<h5 class="font-label-md text-label-md text-ink-slate">Grocery Shopping Guide</h5>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-secondary font-bold uppercase">Value</p>
+<p class="font-label-md text-label-md text-success-green">$15</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-6 bg-white rounded-2xl border border-border-muted shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">restaurant</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Bonus #5</p>
+<h5 class="font-label-md text-label-md text-ink-slate">Cheat Meal Survival Guide</h5>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-secondary font-bold uppercase">Value</p>
+<p class="font-label-md text-label-md text-success-green">$15</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Results -->
+<section class="py-section-gap bg-surface-base" id="results">
+<div class="max-w-container-max mx-auto px-margin-edge">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-slate mb-4">Real Results, Real Confidence</h2>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">People are seeing better energy, better routines, and better habits with the Lean90 system.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="rounded-[24px] border border-border-muted bg-white p-8 shadow-sm hover:shadow-xl transition-all">
+<div class="flex items-center gap-2 text-success-green mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-4">“I finally feel in control of my routine. The plan is simple, realistic, and actually sustainable.”</p>
+<div>
+<p class="font-label-md text-label-md text-ink-slate">Johnson</p>
+<p class="text-sm text-secondary">Lost 12 kg in 90 days</p>
+</div>
+</div>
+<div class="rounded-[24px] border border-border-muted bg-white p-8 shadow-sm hover:shadow-xl transition-all">
+<div class="flex items-center gap-2 text-success-green mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-4">“My energy improved fast, and I no longer feel guilty about eating good food while still losing weight.”</p>
+<div>
+<p class="font-label-md text-label-md text-ink-slate">Williams</p>
+<p class="text-sm text-secondary">Improved consistency and confidence</p>
+</div>
+</div>
+<div class="rounded-[24px] border border-border-muted bg-white p-8 shadow-sm hover:shadow-xl transition-all">
+<div class="flex items-center gap-2 text-success-green mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mb-4">“The workouts are easy to follow and the meal guidance made everything much less stressful.”</p>
+<div>
+<p class="font-label-md text-label-md text-ink-slate">Jones</p>
+<p class="text-sm text-secondary">Built better habits in 3 months</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Pricing -->
+<section class="py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-edge">
+<div class="bg-ink-slate rounded-[40px] p-12 relative overflow-hidden shadow-2xl">
+<!-- Animation background placeholder -->
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/40 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-success-green/40 blur-[120px] rounded-full"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto">
+<div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-primary mb-4">
+<span class="material-symbols-outlined text-base">workspace_premium</span>
+Total Combined Value: <span class="line-through opacity-70 ml-1">$106</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-white mb-4">Today Only</h2>
+<div class="text-success-green font-display-lg text-[80px] leading-none mb-8 tracking-tight">$29</div>
+<button class="w-full max-w-md bg-success-green text-white font-label-md text-label-md py-6 rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-success-green/30 mb-8">
+Get Instant Access Now
+</button>
+<div class="flex flex-wrap justify-center gap-6 text-on-primary/80 text-sm">
+<div class="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+Secure Checkout
+</div>
+<div class="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+<span class="material-symbols-outlined text-sm">bolt</span>
+Instant Digital Access
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: FAQ -->
+<section class="py-section-gap bg-surface-base" id="faq">
+<div class="max-w-3xl mx-auto px-margin-edge">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-slate mb-4">Frequently Asked Questions</h2>
+<p class="font-body-lg text-body-lg text-secondary">Everything you need to know before you start.</p>
+</div>
+<div class="space-y-4">
+<!-- FAQ Item -->
+<div class="border border-border-muted rounded-2xl overflow-hidden bg-white">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-subtle transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-label-md text-ink-slate">Is this beginner friendly?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="p-6 pt-0 border-t border-border-muted text-secondary font-body-md text-body-md hidden">
+                            Yes, absolutely! The Lean90 System is designed for people of all fitness levels. We start with fundamentals and progressively build up your knowledge and capabilities.
+                        </div>
+</div>
+<div class="border border-border-muted rounded-2xl overflow-hidden bg-white">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-subtle transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-label-md text-ink-slate">Do I need a gym?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="p-6 pt-0 border-t border-border-muted text-secondary font-body-md text-body-md hidden">
+                            No, you don't! We include both home workout programs (bodyweight exercises) and gym workout programs, so you can choose what works best for your situation.
+                        </div>
+</div>
+<div class="border border-border-muted rounded-2xl overflow-hidden bg-white">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-subtle transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-label-md text-ink-slate">Is the plan suitable for men and women?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="p-6 pt-0 border-t border-border-muted text-secondary font-body-md text-body-md hidden">
+                            Yes, the principles of fat loss are the same regardless of gender. The program provides guidelines to customize it based on your individual goals and body type.
+                        </div>
+</div>
+<div class="border border-border-muted rounded-2xl overflow-hidden bg-white">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-subtle transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-label-md text-ink-slate">Is this a subscription?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="p-6 pt-0 border-t border-border-muted text-secondary font-body-md text-body-md hidden">
+                            No, this is a one-time purchase. You get lifetime access to all materials with no recurring fees or hidden costs.
+                        </div>
+</div>
+<div class="border border-border-muted rounded-2xl overflow-hidden bg-white">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-subtle transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-label-md text-ink-slate">How do I access it?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="p-6 pt-0 border-t border-border-muted text-secondary font-body-md text-body-md hidden">
+                            You'll receive instant digital access after purchase. All materials are downloadable PDFs that you can view on any device or print out.
+                        </div>
+</div>
+<div class="border border-border-muted rounded-2xl overflow-hidden bg-white">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-subtle transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-md text-label-md text-ink-slate">What if I have dietary restrictions?</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</button>
+<div class="p-6 pt-0 border-t border-border-muted text-secondary font-body-md text-body-md hidden">
+                            Our meal plans are flexible and include guidance on adapting recipes for various dietary needs including vegetarian, gluten-free, and dairy-free options.
+                        </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-ink-slate py-4 border-t border-border-muted">
+<!-- Trust Badges Section -->
+<div class="max-w-container-max mx-auto px-margin-edge mb-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+<div class="flex flex-col items-center gap-1 text-on-primary">
+<span class="material-symbols-outlined text-xl text-success-green">lock</span>
+<span class="font-label-md text-label-md text-xs">Secure Checkout</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-primary">
+<span class="material-symbols-outlined text-xl text-success-green">download</span>
+<span class="font-label-md text-label-md text-xs">Instant Access</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-primary">
+<span class="material-symbols-outlined text-xl text-success-green">description</span>
+<span class="font-label-md text-label-md text-xs">Digital Product</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-primary">
+<span class="material-symbols-outlined text-xl text-success-green">mail</span>
+<span class="font-label-md text-label-md text-xs">Email Support</span>
+</div>
+</div>
+</div>
+<!-- Main Footer Content -->
+<div class="max-w-container-max mx-auto px-margin-edge border-t border-border-muted/30 pt-4">
+<div class="flex flex-col items-center text-center">
+<img alt="HealthDecod Logo" class="w-24 h-24 object-contain mb-2" src="https://i.ibb.co/zWNjs1sf/image-from-https-lean90-preview-preview-emergentagent-com-healthdecod-logo.png"/>
+<div class="flex flex-wrap justify-center gap-3 text-on-primary/80 text-xs mb-2">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<span class="text-on-primary/40">•</span>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<span class="text-on-primary/40">•</span>
+<a class="hover:text-primary transition-colors" href="#">Refund Policy</a>
+</div>
+<p class="font-body-md text-body-md text-on-primary/70 text-xs">© 2026 HealthDecod. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- FAB for quick conversion on scroll (Optional but modern) -->
+<div class="fixed bottom-8 right-8 z-40 translate-y-24 transition-transform duration-500" id="sticky-cta">
+<button class="bg-success-green text-white font-label-md text-label-md px-6 py-4 rounded-full shadow-2xl flex items-center gap-2">
+            Get Lean90 Now
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<script>
+        // Micro-interaction for sticky CTA appearance
+        window.addEventListener('scroll', () => {
+            const cta = document.getElementById('sticky-cta');
+            if (window.scrollY > 800) {
+                cta.classList.remove('translate-y-24');
+            } else {
+                cta.classList.add('translate-y-24');
+            }
+        });
+
+        // Simple smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const animatedImage = document.querySelector('.image-animate');
+        if (animatedImage) {
+            animatedImage.addEventListener('click', function () {
+                animatedImage.classList.remove('clicked');
+                void animatedImage.offsetWidth;
+                animatedImage.classList.add('clicked');
+            });
+        }
+    });
+</script>
+</body></html>
